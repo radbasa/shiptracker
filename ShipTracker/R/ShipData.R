@@ -13,6 +13,8 @@ ShipData <- R6::R6Class(
             stopifnot(file.exists(data_file_path))
             private$data_file_path <- data_file_path
             private$read_data()
+            private$parse_ships()
+            private$parse_ship_types()
         },
         
         #' @description 
@@ -30,11 +32,7 @@ ShipData <- R6::R6Class(
         #' @return 
         #' Named list of ship types sorted by numerical ship type value
         get_ship_types = function() {
-            unique_ship_types <- private$data %>%
-                select(SHIPTYPE, ship_type) %>%
-                distinct() %>%
-                arrange(SHIPTYPE)
-            setNames(unique_ship_types$SHIPTYPE, unique_ship_types$ship_type)
+            setNames(private$ship_types$SHIPTYPE, private$ship_types$ship_type)
         }
     ),
     private = list(
@@ -44,6 +42,12 @@ ShipData <- R6::R6Class(
         
         #' @field data Loaded ship data
         data = NULL,
+        
+        #' @field data frame of ships
+        ships = NULL,
+        
+        #' @field data frame of ship types
+        ship_types = NULL,
         
         #' @description
         #' Read ship data CSV file
@@ -71,6 +75,23 @@ ShipData <- R6::R6Class(
                                         port = col_factor(),
                                         is_parked = col_integer()
                                     ))
+        },
+        
+        #' @description 
+        #' Extract unique ships
+        parse_ships = function() {
+            private$ships <- private$data %>%
+                select(SHIP_ID, SHIPNAME, SHIPTYPE, ship_type) %>%
+                distinct()
+        },
+        
+        #' @description 
+        #' Extract ship types
+        parse_ship_types = function() {
+            private$ship_types <- private$ships %>%
+                select(SHIPTYPE, ship_type) %>%
+                distinct() %>%
+                arrange(SHIPTYPE)
         }
     )
 )

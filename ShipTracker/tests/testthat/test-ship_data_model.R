@@ -28,6 +28,8 @@ ship_type_test <- function(ship_data) {
 }
 
 test_that("Ship Data Model", {
+    expect_error(ShipData$new('xxxxxxx.csv'))       
+    
     ship_data <- ShipData$new(file_path)
     
     row_test(ship_data, file_path)

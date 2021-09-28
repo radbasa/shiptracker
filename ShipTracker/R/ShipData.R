@@ -10,6 +10,7 @@ ShipData <- R6::R6Class(
         #' Create a ship data model object
         #' @param data_file_path Ship data CSV file path
         initialize = function(data_file_path) {
+            stopifnot(file.exists(data_file_path))
             private$data_file_path <- data_file_path
             private$read_data()
         },

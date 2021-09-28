@@ -16,8 +16,24 @@ ShipData <- R6::R6Class(
         
         #' @description 
         #' Retrieve entire ship data frame
+        #' 
+        #' @return 
+        #' Data frame
         get_data = function() {
             private$data
+        },
+        
+        #' @description
+        #' Retrieve available ship types
+        #' 
+        #' @return 
+        #' Named list of ship types sorted by numerical ship type value
+        get_ship_types = function() {
+            unique_ship_types <- private$data %>%
+                select(SHIPTYPE, ship_type) %>%
+                distinct() %>%
+                arrange(SHIPTYPE)
+            setNames(unique_ship_types$SHIPTYPE, unique_ship_types$ship_type)
         }
     ),
     private = list(

@@ -52,6 +52,42 @@ ShipData <- R6::R6Class(
                 select(SHIP_ID, SHIPNAME) %>%
                 arrange(SHIPNAME)
             setNames(ships$SHIP_ID, ships$SHIPNAME)
+        },
+        
+        #' @description
+        #' 
+        #' @param
+        #' ship_id A number representing the ship ID
+        #' @return
+        #' Data frame of the ship's legs from point to point with distance in meters sorted by distance descending
+        get_ship_legs = function(ship_id) {
+            ship_legs <- private$data %>%
+                filter(
+                    SHIP_ID == ship_id
+                ) %>%
+                select(LAT, LON, DATETIME) %>%
+                arrange(DATETIME) %>%
+                mutate(
+                    LAT2 = lead(LAT),
+                    LON2 = lead(LON),
+                    DATETIME2 = lead(DATETIME),
+                    leg = row_number()
+                ) %>%
+                filter(
+                    complete.cases(.)
+                )
+            
+            distance <- function(leg, output) {
+                return(distm(as.numeric(c(leg[2], leg[1])),
+                             as.numeric(c(leg[5], leg[4])),
+                             fun = distHaversine))
+            }
+            ship_legs$dist <- apply(ship_legs, 1, distance)
+            
+            ship_legs %>%
+                arrange(
+                    desc(dist), desc(DATETIME2)
+                )
         }
     ),
     private = list(

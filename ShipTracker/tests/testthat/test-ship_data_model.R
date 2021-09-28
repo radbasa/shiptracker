@@ -27,6 +27,19 @@ ship_type_test <- function(ship_data) {
     expect_named(ship_types, expected)
 }
 
+ships_of_type_test <- function(ship_data) {
+    context("Ship Data Model - ships of type test")
+    
+    expect_error(ship_data$get_ships_of_type())
+    expect_error(ship_data$get_ships_of_type(NA))
+    expect_error(ship_data$get_ships_of_type(NULL))
+    expect_error(ship_data$get_ships_of_type(""))
+    
+    
+    expect_length(ship_data$get_ships_of_type(1), 7)
+    expect_length(ship_data$get_ships_of_type("4"), 3)
+}
+
 test_that("Ship Data Model", {
     expect_error(ShipData$new('xxxxxxx.csv'))       
     
@@ -34,4 +47,5 @@ test_that("Ship Data Model", {
     
     row_test(ship_data, file_path)
     ship_type_test(ship_data)
+    ships_of_type_test(ship_data)
 })

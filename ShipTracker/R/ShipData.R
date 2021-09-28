@@ -30,9 +30,28 @@ ShipData <- R6::R6Class(
         #' Retrieve available ship types
         #' 
         #' @return 
-        #' Named list of ship types sorted by numerical ship type value
+        #' Named vector of ship types sorted by numerical ship type value
         get_ship_types = function() {
             setNames(private$ship_types$SHIPTYPE, private$ship_types$ship_type)
+        },
+        
+        #' @description 
+        #' Retrieve ships of ship type
+        #' 
+        #' @param 
+        #' ship_type A number representing ship type ID
+        #' @return 
+        #' Named vector of ships filtered by ship type
+        get_ships_of_type = function(ship_type_id) {
+            stopifnot(!is.na(ship_type_id), !is.null(ship_type_id), ship_type_id != "")
+            # browser()
+            ships <- private$ships %>%
+                filter(
+                    SHIPTYPE == ship_type_id
+                ) %>%
+                select(SHIP_ID, SHIPNAME) %>%
+                arrange(SHIPNAME)
+            setNames(ships$SHIP_ID, ships$SHIPNAME)
         }
     ),
     private = list(
@@ -62,7 +81,7 @@ ShipData <- R6::R6Class(
                                         DESTINATION = col_factor(),
                                         FLAG = col_factor(),
                                         LENGTH = col_integer(),
-                                        SHIPNAME = col_factor(),
+                                        SHIPNAME = col_character(),
                                         SHIPTYPE = col_integer(),
                                         SHIP_ID = col_character(),
                                         WIDTH = col_integer(),

@@ -43,7 +43,7 @@ ships_of_type_test <- function(ship_data) {
 ship_legs_test <- function(ship_data) {
     context("Ship Data Model - ship legs test")
     
-    expected <- c("LAT", "LON", "DATETIME", "LAT2", "LON2", "DATETIME2", "leg", "dist")
+    expected <- c("leg", "LAT", "LON", "DATETIME", "LAT2", "LON2", "DATETIME2", "dist")
     ship_legs <- ship_data$get_ship_legs(316100)
     expect_s3_class(ship_legs, "data.frame")
     expect_named(ship_legs, expected)

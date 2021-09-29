@@ -65,21 +65,20 @@ ShipData <- R6::R6Class(
                 filter(
                     SHIP_ID == ship_id
                 ) %>%
-                select(LAT, LON, DATETIME) %>%
-                arrange(DATETIME) %>%
+                select(leg, LAT, LON, DATETIME) %>%
+                arrange(leg) %>%
                 mutate(
                     LAT2 = lead(LAT),
                     LON2 = lead(LON),
                     DATETIME2 = lead(DATETIME),
-                    leg = row_number()
                 ) %>%
                 filter(
                     complete.cases(.)
                 )
             
             distance <- function(leg, output) {
-                return(distm(as.numeric(c(leg[2], leg[1])),
-                             as.numeric(c(leg[5], leg[4])),
+                return(distm(as.numeric(c(leg[3], leg[2])),
+                             as.numeric(c(leg[6], leg[5])),
                              fun = distHaversine))
             }
             ship_legs$dist <- apply(ship_legs, 1, distance)
@@ -107,7 +106,7 @@ ShipData <- R6::R6Class(
         #' @description
         #' Read ship data CSV file
         read_data = function() {
-            private$data <- read_csv(private$data_file_path,
+            raw_data <- read_csv(private$data_file_path,
                                      col_types = cols(
                                         LAT = col_double(),
                                         LON = col_double(),
@@ -130,6 +129,11 @@ ShipData <- R6::R6Class(
                                         port = col_factor(),
                                         is_parked = col_integer()
                                     ))
+            private$data <- raw_data %>%
+                group_by(SHIP_ID) %>%
+                arrange(DATETIME) %>%
+                mutate(leg = row_number()) %>%
+                ungroup()
         },
         
         #' @description 

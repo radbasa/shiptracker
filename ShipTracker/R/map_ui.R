@@ -3,7 +3,7 @@ mapOutput <- function(id, label = "Map Output") {
     
     tagList(
         card(
-            DT::dataTableOutput(ns("table"))
+            leafletOutput(ns("ship_map"))
         )
     )
 }

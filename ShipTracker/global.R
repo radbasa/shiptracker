@@ -3,8 +3,14 @@ library(shiny.semantic)
 library(readr)
 library(dplyr)
 library(geosphere)
+library(leaflet)
 library(DT)
 
 global <- list(
-    data_file_path = file.path("data", "ships.csv")
+    data_file_path = file.path("data", "ships.csv"),
+    mapbox = list(
+        url = '//api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}/?access_token={accessToken}',
+        style = 'mapbox/light-v10',
+        token = Sys.getenv('mapbox_token')
+    )
 )

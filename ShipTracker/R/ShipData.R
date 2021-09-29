@@ -87,6 +87,20 @@ ShipData <- R6::R6Class(
                 arrange(
                     desc(dist), desc(DATETIME2)
                 )
+        },
+        
+        get_ship_info = function(ship_id) {
+            private$data %>%
+                filter(
+                    SHIP_ID == ship_id
+                ) %>%
+                select(SHIP_ID, SHIPNAME, FLAG, LENGTH, WIDTH, DWT, date) %>%
+                group_by(SHIP_ID, SHIPNAME, FLAG, LENGTH, WIDTH, DWT) %>%
+                summarise(
+                    observations = n(),
+                    fromdate = min(date),
+                    todate = max(date)
+                )
         }
     ),
     private = list(

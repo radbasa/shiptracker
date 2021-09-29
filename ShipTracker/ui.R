@@ -15,4 +15,12 @@ semanticPage(
             mapOutput("map_output")
         )
     ),
+    segment(
+        class = "basic",
+        cards(
+            class = "two",
+            infoUI("info_card"),
+            chartUI("chart_card")
+        )
+    )
 )

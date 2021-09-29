@@ -18,6 +18,9 @@ inputServer <- function(id) {
                 list(
                     ship_legs = reactive({
                         ship_data$get_ship_legs(input$ship_select)
+                    }),
+                    ship_info = reactive({
+                        ship_data$get_ship_info(input$ship_select)
                     })
                 )
             )

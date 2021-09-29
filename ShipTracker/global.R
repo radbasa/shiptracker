@@ -4,6 +4,7 @@ library(readr)
 library(dplyr)
 library(geosphere)
 library(leaflet)
+library(ggplot2)
 library(DT)
 
 global <- list(

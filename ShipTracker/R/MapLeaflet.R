@@ -98,7 +98,7 @@ MapLeaflet <- R6::R6Class(
         #' 
         #' @return List of points in data frame format and distance in meters
         get_longest_leg = function(legs) {
-            longest_leg <- legs %>% first()
+            longest_leg <- legs %>% slice(1)
             points <- data.frame(
                 lng = c(longest_leg$LON, longest_leg$LON2),
                 lat = c(longest_leg$LAT, longest_leg$LAT2),

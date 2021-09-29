@@ -1,3 +1,5 @@
 shinyServer(function(input, output, session) {
-    inputServer("dropdown_inputs")
+    selected <- inputServer("dropdown_inputs")
+    
+    mapServer("map_output", selected_ship = selected)
 })

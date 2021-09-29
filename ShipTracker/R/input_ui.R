@@ -1,4 +1,4 @@
-inputUI <- function(id, label = "Input") {
+inputUI <- function(id, label = "Inputs") {
     ns <- NS(id)
     
     tagList(

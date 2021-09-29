@@ -12,9 +12,7 @@ semanticPage(
         cards(
             class = "two",
             inputUI("dropdown_inputs"),
-            card(
-                p("Data output placeholder")
-            )
+            mapOutput("map_output")
         )
-    )
+    ),
 )

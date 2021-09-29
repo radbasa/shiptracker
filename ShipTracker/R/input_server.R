@@ -14,6 +14,14 @@ inputServer <- function(id) {
                 update_dropdown_input(session, "ship_select", choices = names(ship_list), choices_value = ship_list, value = NULL)
             }, ignoreNULL = TRUE, ignoreInit = TRUE)
             
+            return(
+                list(
+                    ship_legs = reactive({
+                        ship_data$get_ship_legs(input$ship_select)
+                    })
+                )
+            )
+            
             session$onSessionEnded(function() {
                 stopApp()
             })

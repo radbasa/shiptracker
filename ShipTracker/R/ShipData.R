@@ -16,16 +16,7 @@ ShipData <- R6::R6Class(
             private$parse_ships()
             private$parse_ship_types()
         },
-        
-        #' @description 
-        #' Retrieve entire ship data frame
-        #' 
-        #' @return 
-        #' Data frame
-        get_data = function() {
-            private$data
-        },
-        
+
         #' @description
         #' Retrieve available ship types
         #' 

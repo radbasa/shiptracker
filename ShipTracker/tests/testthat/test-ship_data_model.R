@@ -8,7 +8,14 @@ source("R/ShipData.R")
 
 file_path <- "data/ships.csv"
 
-
+TestShipData <- R6::R6Class(
+    inherit = ShipData,
+    public = list(
+        get_data = function() {
+            private$data
+        }
+    )
+)
 
 row_test <- function(ship_data, file_path) {
     context("Ship Data Model - read test")
@@ -35,7 +42,6 @@ ships_of_type_test <- function(ship_data) {
     expect_error(ship_data$get_ships_of_type(NULL))
     expect_error(ship_data$get_ships_of_type(""))
     
-    
     expect_length(ship_data$get_ships_of_type(1), 7)
     expect_length(ship_data$get_ships_of_type("4"), 3)
 }
@@ -51,10 +57,12 @@ ship_legs_test <- function(ship_data) {
 }
 
 test_that("Ship Data Model", {
-    expect_error(ShipData$new('xxxxxxx.csv'))       
+    expect_error(TestShipData$new('xxxxxxx.csv'))
     
-    ship_data <- ShipData$new(file_path)
+    ship_data <- TestShipData$new(file_path)
     
+    expect_s3_class(ship_data, "R6")
+
     row_test(ship_data, file_path)
     ship_type_test(ship_data)
     ships_of_type_test(ship_data)

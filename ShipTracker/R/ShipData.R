@@ -82,7 +82,7 @@ ShipData <- R6::R6Class(
                              fun = distHaversine))
             }
             ship_legs$dist <- apply(ship_legs, 1, distance)
-            
+
             ship_legs %>%
                 arrange(
                     desc(dist), desc(DATETIME2)

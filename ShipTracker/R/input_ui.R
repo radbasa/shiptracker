@@ -3,8 +3,8 @@ inputUI <- function(id, label = "Inputs") {
     
     tagList(
         card(
-            dropdown_input(ns("shiptype_select"), c("A", "B", "C")),
-            dropdown_input(ns("ship_select"), c("E", "F", "G"))
+            dropdown_input(ns("shiptype_select"), c(), default_text = "Select Ship Type"),
+            dropdown_input(ns("ship_select"), c(), default_text = "Select Ship")
         )
     )
 }

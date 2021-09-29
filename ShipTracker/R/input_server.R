@@ -21,10 +21,6 @@ inputServer <- function(id) {
                     })
                 )
             )
-            
-            session$onSessionEnded(function() {
-                stopApp()
-            })
         }
     )
 }

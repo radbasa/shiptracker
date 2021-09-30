@@ -11,7 +11,7 @@ mapServer <- function(id, selected_ship) {
             })
             
             observeEvent(selected_ship$ship_legs(), {
-                map_leaflet$data_render(selected_ship$ship_legs)
+                map_leaflet$data_render(selected_ship$ship_legs())
             })
         }
     )

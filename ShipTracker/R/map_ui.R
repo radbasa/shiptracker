@@ -4,7 +4,7 @@ mapOutput <- function(id, label = "Map Output") {
     tagList(
         segment(
             div(
-                leafletOutput(ns("ship_map"))
+                leafletOutput(ns("ship_map"), height = "600px")
             )
         )
     )

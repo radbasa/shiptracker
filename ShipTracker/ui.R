@@ -5,6 +5,7 @@ grid_charts <- grid_template(
 )
 
 semanticPage(
+    waiter::use_waiter(),
     title = "My first page",
     h1("My page"),
     segment(

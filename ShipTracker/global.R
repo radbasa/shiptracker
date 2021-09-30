@@ -5,7 +5,8 @@ library(dplyr)
 library(geosphere)
 library(leaflet)
 library(ggplot2)
-library(DT)
+library(waiter)
+# library(DT)
 
 global <- list(
     data_file_path = file.path("data", "ships.rds"),

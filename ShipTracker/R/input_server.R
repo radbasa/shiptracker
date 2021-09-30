@@ -2,7 +2,10 @@ inputServer <- function(id) {
     moduleServer(
         id,
         function(input, output, session) {
+            waiter <- waiter::Waiter$new()
+            waiter$show()
             ship_data <- ShipData$new(global$data_file_path)
+            waiter$hide()
             
             observe({
                 ship_types <- ship_data$get_ship_types()

@@ -4,4 +4,5 @@
 .RData
 .Ruserdata
 .Renviron
-ShipTracker/data/ships.csv
+ShipTracker/raw_data/ships.csv
+ShipTracker/tests/testthat/_snaps/map_server.md

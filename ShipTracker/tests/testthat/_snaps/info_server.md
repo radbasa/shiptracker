@@ -1,0 +1,7 @@
+# Info Server outputs info
+
+    Code
+      output$ship_info_table
+    Output
+      {"x":{"filter":"none","vertical":false,"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>SHIP_ID<\/th>\n      <th>SHIPNAME<\/th>\n      <th>FLAG<\/th>\n      <th>LENGTH<\/th>\n      <th>WIDTH<\/th>\n      <th>DWT<\/th>\n      <th>observations<\/th>\n      <th>fromdate<\/th>\n      <th>todate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[4,5,6,7]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"serverSide":true,"processing":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[],"deps":[{"name":"jquery","version":"3.6.0","src":{"href":"jquery-3.6.0"},"meta":null,"script":"jquery-3.6.0.min.js","stylesheet":null,"head":null,"attachment":null,"all_files":true},{"name":"dt-core","version":"1.10.20","src":{"href":"dt-core-1.10.20"},"meta":null,"script":"js/jquery.dataTables.min.js","stylesheet":["css/jquery.dataTables.min.css","css/jquery.dataTables.extra.css"],"head":null,"attachment":null,"package":null,"all_files":false},{"name":"crosstalk","version":"1.1.1","src":{"href":"crosstalk-1.1.1"},"meta":null,"script":"js/crosstalk.min.js","stylesheet":"css/crosstalk.css","head":null,"attachment":null,"all_files":true}]} 
+

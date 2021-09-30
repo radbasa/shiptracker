@@ -7,7 +7,7 @@ setwd("../..")
 source("R/ShipData.R")
 source("R/MapLeaflet.R")
 
-file_path <- "data/ships.csv"
+file_path <- "data/ships.rds"
 
 
 TestMapLeaflet <- R6::R6Class(

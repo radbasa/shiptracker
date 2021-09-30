@@ -8,7 +8,7 @@ library(ggplot2)
 library(DT)
 
 global <- list(
-    data_file_path = file.path("data", "ships.csv"),
+    data_file_path = file.path("data", "ships.rds"),
     mapbox = list(
         url = '//api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}/?access_token={accessToken}',
         style = 'mapbox/light-v10',

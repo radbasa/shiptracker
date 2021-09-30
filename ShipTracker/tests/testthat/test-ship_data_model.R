@@ -6,7 +6,8 @@ context("Ship Data Model")
 setwd("../..")
 source("R/ShipData.R")
 
-file_path <- "data/ships.csv"
+file_path <- "data/ships.rds"
+raw_file_path <- "raw_data/ships.csv"
 
 TestShipData <- R6::R6Class(
     inherit = ShipData,
@@ -17,10 +18,31 @@ TestShipData <- R6::R6Class(
     )
 )
 
-row_test <- function(ship_data, file_path) {
-    context("Ship Data Model - read test")
-    raw_data <- read.csv(file_path)
-    
+row_test <- function(ship_data, raw_file_path) {
+    raw_data <- read_csv(raw_file_path,
+                         col_types = cols(
+                             LAT = col_double(),
+                             LON = col_double(),
+                             SPEED = col_integer(),
+                             COURSE = col_integer(),
+                             HEADING = col_integer(),
+                             DESTINATION = col_factor(),
+                             FLAG = col_factor(),
+                             LENGTH = col_integer(),
+                             SHIPNAME = col_character(),
+                             SHIPTYPE = col_integer(),
+                             SHIP_ID = col_character(),
+                             WIDTH = col_integer(),
+                             DWT = col_integer(),
+                             DATETIME = col_datetime(format = ""),
+                             PORT = col_factor(),
+                             date = col_date(format = ""),
+                             week_nb = col_integer(),
+                             ship_type = col_factor(),
+                             port = col_factor(),
+                             is_parked = col_integer()
+                         ))
+
     expect_equal(nrow(ship_data$get_data()), nrow(raw_data))
 }
 
@@ -57,13 +79,13 @@ ship_legs_test <- function(ship_data) {
 }
 
 test_that("Ship Data Model", {
-    expect_error(TestShipData$new('xxxxxxx.csv'))
+    expect_error(TestShipData$new('xxxxxxx.rds'))
     
     ship_data <- TestShipData$new(file_path)
     
     expect_s3_class(ship_data, "R6")
 
-    row_test(ship_data, file_path)
+    row_test(ship_data, raw_file_path)
     ship_type_test(ship_data)
     ships_of_type_test(ship_data)
     ship_legs_test(ship_data)

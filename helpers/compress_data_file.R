@@ -25,4 +25,4 @@ raw <- read_csv("raw_data/ships.csv",
                     is_parked = col_integer()
                 ))
 
-saveRDS(raw, 'data/ships.rds')
+saveRDS(raw, 'ShipTracker/data/ships.rds')

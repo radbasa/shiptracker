@@ -32,8 +32,7 @@ MapLeaflet <- R6::R6Class(
         },
         
         data_render = function(leg_data) {
-            req(leg_data())
-            legs <- leg_data()
+            legs <- leg_data
             if (nrow(legs) == 0)
                 return()
             

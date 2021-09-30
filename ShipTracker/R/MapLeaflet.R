@@ -26,6 +26,8 @@ MapLeaflet <- R6::R6Class(
         
         #' @description 
         #' Create Leaflet instance
+        #' 
+        #' @return A Leaflet map instance
         make_leaflet = function() {
             leaflet() %>%
                 addTiles(urlTemplate = private$mapbox_creds$url, group = 'MapBox', options = tileOptions(
@@ -39,8 +41,13 @@ MapLeaflet <- R6::R6Class(
                 setView(lng = 23.3833318, lat = 48.499998, zoom = 10)
         },
         
-        data_render = function(leg_data) {
-            legs <- leg_data
+        #' @description 
+        #' Render shapes on Leaflet
+        #' 
+        #' @param legs Data frame of a ship's legs from point 1 (long, lat) to point 2 (long, lat) with timestamps
+        #' 
+        #' @return Updates this Leaflet instance
+        data_render = function(legs) {
             if (nrow(legs) == 0)
                 return()
             
@@ -125,9 +132,9 @@ MapLeaflet <- R6::R6Class(
         #' @description 
         #' Create labels for longest leg points
         #' 
-        #' @param longest_leg
+        #' @param longest_leg 1 row data frame of the ship's longest leg with point 1 (long, lat) and point 2 (long, lat)
         #' 
-        #' @return List of labels
+        #' @return List of labels for use with Leaflet labels
         create_point_labels = function(longest_leg) {
             sprintf(
                 "<table class='table table-condensed'>

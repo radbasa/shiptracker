@@ -33,10 +33,8 @@ ShipData <- R6::R6Class(
         #' @description 
         #' Retrieve ships of ship type
         #' 
-        #' @param 
-        #' ship_type A number representing ship type ID
-        #' @return 
-        #' Named vector of ships filtered by ship type
+        #' @param ship_type A number representing ship type ID
+        #' @return Named vector of ships filtered by ship type
         get_ships_of_type = function(ship_type_id) {
             stopifnot(!is.na(ship_type_id), !is.null(ship_type_id), ship_type_id != "")
             # browser()
@@ -50,11 +48,10 @@ ShipData <- R6::R6Class(
         },
         
         #' @description
+        #' Retrieve all of a ship's legs from point 1 (long, lat) to point 2 (long, lat) with timestamps
         #' 
-        #' @param
-        #' ship_id A number representing the ship ID
-        #' @return
-        #' Data frame of the ship's legs from point to point with distance in meters sorted by distance descending
+        #' @param ship_id A number representing the ship ID
+        #' @return Data frame of the ship's legs from point to point with distance in meters sorted by distance descending
         get_ship_legs = function(ship_id) {
             ship_legs <- private$data %>%
                 filter(
@@ -84,6 +81,11 @@ ShipData <- R6::R6Class(
                 )
         },
         
+        #' @description 
+        #' Retrieve a ship's physical information (name, flag, length, width, deadweight)
+        #' 
+        #' @param ship_id A number representing the ship ID
+        #' @return A data frame of the ship's information containing the physical information and the timeframe they were recorded.
         get_ship_info = function(ship_id) {
             private$data %>%
                 filter(

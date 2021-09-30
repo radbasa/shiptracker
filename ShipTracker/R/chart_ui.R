@@ -2,7 +2,8 @@ chartUI <- function(id, label = "Chart UI") {
     ns <- NS(id)
     
     tagList(
-        card(
+        div(
+            class = "ui grid",
             h1("Distance Traveled Distribution"),
             plotOutput(ns("distance_hist"))
         )

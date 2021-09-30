@@ -1,5 +1,7 @@
 semanticPage(
     vertical_layout(
+        adjusted_to_page = FALSE,
+        header(title = "Longest Distance Travelled by Ships", description = "Data from ship AIS"),
         inputUI("dropdown_inputs"),
         mapOutput("map_output"),
         segment(

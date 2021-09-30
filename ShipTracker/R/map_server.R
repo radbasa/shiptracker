@@ -4,7 +4,9 @@ mapServer <- function(id, selected_ship) {
     moduleServer(
         id,
         function(input, output, session) {
+            flog.debug("mapserver start", name = "mapserver")
             map_leaflet <- MapLeaflet$new("ship_map", global$mapbox)
+            flog.debug(mem_used(), name = "mapserver")
             
             output$ship_map <- renderLeaflet({
                 map_leaflet$make_leaflet()

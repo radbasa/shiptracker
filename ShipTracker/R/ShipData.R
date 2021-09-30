@@ -10,6 +10,8 @@ ShipData <- R6::R6Class(
         #' Create a ship data model object
         #' @param data_file_path Ship data CSV file path
         initialize = function(data_file_path) {
+            flog.debug("shipdata initialize", name = "shipdata")
+            
             stopifnot(file.exists(data_file_path))
             private$data_file_path <- data_file_path
             private$read_data()
@@ -23,6 +25,8 @@ ShipData <- R6::R6Class(
         #' @return 
         #' Named vector of ship types sorted by numerical ship type value
         get_ship_types = function() {
+            flog.debug("shipdata get_ship_types", name = "shipdata")
+            
             setNames(private$ship_types$SHIPTYPE, private$ship_types$ship_type)
         },
         
@@ -35,7 +39,9 @@ ShipData <- R6::R6Class(
         #' Named vector of ships filtered by ship type
         get_ships_of_type = function(ship_type_id) {
             stopifnot(!is.na(ship_type_id), !is.null(ship_type_id), ship_type_id != "")
-            # browser()
+            
+            flog.debug("shipdata get_ship_of_type", name = "shipdata")
+            
             ships <- private$ships %>%
                 filter(
                     SHIPTYPE == ship_type_id
@@ -52,6 +58,8 @@ ShipData <- R6::R6Class(
         #' @return
         #' Data frame of the ship's legs from point to point with distance in meters sorted by distance descending
         get_ship_legs = function(ship_id) {
+            flog.debug("shipdata get_ship_legs", name = "shipdata")
+            
             ship_legs <- private$data %>%
                 filter(
                     SHIP_ID == ship_id
@@ -81,6 +89,8 @@ ShipData <- R6::R6Class(
         },
         
         get_ship_info = function(ship_id) {
+            flog.debug("shipdata get_ship_info", name = "shipdata")
+            
             private$data %>%
                 filter(
                     SHIP_ID == ship_id
@@ -111,6 +121,8 @@ ShipData <- R6::R6Class(
         #' @description
         #' Read ship data CSV file
         read_data = function() {
+            flog.debug("shipdata read_data", name = "shipdata")
+            
             raw_data <- readRDS(private$data_file_path)
 
             private$data <- raw_data %>%
@@ -118,11 +130,15 @@ ShipData <- R6::R6Class(
                 arrange(DATETIME) %>%
                 mutate(leg = row_number()) %>%
                 ungroup()
+            
+            rm(raw_data)
         },
         
         #' @description 
         #' Extract unique ships
         parse_ships = function() {
+            flog.debug("shipdata parse_ships", name = "shipdata")
+            
             private$ships <- private$data %>%
                 select(SHIP_ID, SHIPNAME, SHIPTYPE, ship_type) %>%
                 distinct()
@@ -131,6 +147,8 @@ ShipData <- R6::R6Class(
         #' @description 
         #' Extract ship types
         parse_ship_types = function() {
+            flog.debug("shipdata parse_ship_types", name = "shipdata")
+            
             private$ship_types <- private$ships %>%
                 select(SHIPTYPE, ship_type) %>%
                 distinct() %>%

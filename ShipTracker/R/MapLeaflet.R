@@ -8,6 +8,8 @@ MapLeaflet <- R6::R6Class(
         #' @param name Leaflet Shiny identifier
         #' @param mapbox_creds List of mapbox parameters (url, style, token)
         initialize = function(name, mapbox_creds) {
+            flog.debug("mapleaflet initialize", name = "mapleaflet")
+            
             stopifnot(is.character(name))
             stopifnot(is.list(mapbox_creds))
             
@@ -19,6 +21,8 @@ MapLeaflet <- R6::R6Class(
         #' @description 
         #' Create Leaflet instance
         make_leaflet = function() {
+            flog.debug("mapleaflet make_leaflet", name = "mapleaflet")
+            
             leaflet() %>%
                 addTiles(urlTemplate = private$mapbox_creds$url, group = 'MapBox', options = tileOptions(
                     id = private$mapbox_creds$style,
@@ -32,6 +36,8 @@ MapLeaflet <- R6::R6Class(
         },
         
         data_render = function(leg_data) {
+            flog.debug("mapleaflet data_render", name = "mapleaflet")
+            
             legs <- leg_data
             if (nrow(legs) == 0)
                 return()
@@ -80,6 +86,8 @@ MapLeaflet <- R6::R6Class(
         #' 
         #' @return List of lng, lat boundaries
         get_data_bounds = function(legs) {
+            flog.debug("mapleaflet get_data_bounds", name = "mapleaflet")
+            
             return(
                 list(
                     lat1 = min(legs$LAT, legs$LAT2),
@@ -97,6 +105,8 @@ MapLeaflet <- R6::R6Class(
         #' 
         #' @return List of points in data frame format and distance in meters
         get_longest_leg = function(legs) {
+            flog.debug("mapleaflet get_longest_leg", name = "mapleaflet")
+            
             longest_leg <- legs %>% slice(1)
             points <- data.frame(
                 lng = c(longest_leg$LON, longest_leg$LON2),
@@ -121,6 +131,8 @@ MapLeaflet <- R6::R6Class(
         #' 
         #' @return List of labels
         create_point_labels = function(longest_leg) {
+            flog.debug("mapleaflet create_point_labels", name = "mapleaflet")
+            
             sprintf(
                 "<table class='table table-condensed'>
                     <tr>

@@ -2,8 +2,8 @@ mapOutput <- function(id, label = "Map Output") {
     ns <- NS(id)
     
     tagList(
-        card(
+        # card(
             leafletOutput(ns("ship_map"))
-        )
+        # )
     )
 }

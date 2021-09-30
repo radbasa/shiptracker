@@ -7,11 +7,12 @@ grid_charts <- grid_template(
 layout_template = grid_template(
     default = list(
         areas = rbind(
-            c("userinput", "map"),
-            c("shipinfo", "map")
+            c("userinput"),
+            c("map"),
+            c("shipinfo")
         ),
-        cols_width = c("400px", "600px"),
-        rows_height = c("100px", "auto")
+        cols_width = c("auto"),
+        rows_height = c("120px", "auto", "auto")
     ),
     mobile = list(
         areas = rbind(
@@ -20,7 +21,7 @@ layout_template = grid_template(
             "shipinfo"
         ),
         cols_width = c("100%"),
-        rows_height = c("200px", "auto", "400px")
+        rows_height = c("120px", "auto", "400px")
     )
 )
 
@@ -29,11 +30,11 @@ semanticPage(
         layout_template,
         userinput = inputUI("dropdown_inputs"),
         map = mapOutput("map_output"),
-        shipinfo = div(
+        shipinfo = segment(
                 tabset(
                     tabs = list(
                         list(menu = "Ship Info", content = infoUI("info_card")),
-                        list(menu = "Distance Histogram", content = chartUI("chart_card"))
+                        list(menu = "Distance Travelled Histogram", content = chartUI("chart_card"))
                     )
                 )
             )

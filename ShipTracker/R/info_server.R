@@ -7,7 +7,16 @@ infoServer <- function(id, selected_ship) {
             output$ship_info_table <- renderDataTable({
                 req(selected_ship$ship_info())
                 
-                selected_ship$ship_info()
+                datatable(selected_ship$ship_info(),
+                          colnames = c("Ship ID", 
+                                       "Ship Name",
+                                       "Flag", 
+                                       "Length (meters)", 
+                                       "Width (meters)", 
+                                       "Deadweight (tonnes)", 
+                                       "Observations", 
+                                       "From Date", 
+                                       "To Date"))
             })
         }
     )

@@ -7,7 +7,7 @@ setwd("../..")
 source("R/ShipData.R")
 
 file_path <- "data/ships.rds"
-raw_file_path <- "raw_data/ships.csv"
+raw_file_path <- "../raw_data/ships.csv"
 
 TestShipData <- R6::R6Class(
     inherit = ShipData,

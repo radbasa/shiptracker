@@ -1,7 +1,11 @@
 #' R6 Class Data Model for Ship Data
 #' 
 #' @description
+#' Container for ship data
 #' 
+#' @details
+#' Performs business logic on ship data such as filtering
+
 ShipData <- R6::R6Class(
     'ShipData',
     public = list(

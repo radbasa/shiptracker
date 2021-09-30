@@ -1,3 +1,11 @@
+#' R6 Class Model for Leaflet
+#' 
+#' @description 
+#' Container for Leaflet
+#' 
+#' @details
+#' Performs Leaflet rendering functions
+
 MapLeaflet <- R6::R6Class(
     'MapLeaflet',
     public = list(
